@@ -1,0 +1,7 @@
+data
+.phpunit.result.cache
+vendor
+*.http
+src/akismet
+src/hello.php
+src/index.php

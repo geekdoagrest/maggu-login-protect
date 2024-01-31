@@ -33,7 +33,7 @@ class MagguLoginProtect{
 
     public static function menu(){
 		add_options_page(
-			__( 'Login Protect', 'maggu-login-protect' ),
+			__( 'Maggu: Login Protect', 'maggu-login-protect' ),
 			__( 'Login Protect', 'maggu-login-protect' ),
 			'manage_options',
 			'maggu-login-protect',
@@ -51,11 +51,38 @@ class MagguLoginProtect{
         global $wpdb;
 
         $status = (int)('wp_login' == current_filter());
+        $ip = apply_filters( 'maggu_get_ip', $_SERVER);
 
         $wpdb->insert('maggu_login_protect', [
             'user_login' => $username,
-            'status'     => $status
+            'status'     => $status,
+            'ip'         => $ip,
         ], ['%s', '%d']);
+    }
+
+
+    public static function get_ip(){
+        $headers = [
+            'HTTP_CF_CONNECTING_IP', // CloudFlare
+            'HTTP_X_FORWARDED_FOR',  // AWS LB and other reverse-proxies
+            'HTTP_X_REAL_IP',
+            'HTTP_X_CLIENT_IP',
+            'HTTP_CLIENT_IP',
+            'HTTP_X_CLUSTER_CLIENT_IP',
+        ];
+        
+        foreach ($headers as $header) {
+            if (array_key_exists($header, $_SERVER)) {
+                $ip = $_SERVER[$header];
+                
+                // This line might or might not be used.
+                $ip = trim(explode(',', $ip)[0]);
+                
+                return $ip;
+            }
+        }
+        
+        return $_SERVER['REMOTE_ADDR'];
     }
 }
 
@@ -64,3 +91,4 @@ register_activation_hook( __FILE__, ['MagguLoginProtect','install']);
 add_action('admin_menu',      ['MagguLoginProtect', 'menu']);
 add_action('wp_login',        ['MagguLoginProtect', 'log']);
 add_action('wp_login_failed', ['MagguLoginProtect', 'log']);
+add_filter('maggu_get_ip',    ['MagguLoginProtect', 'get_ip']);

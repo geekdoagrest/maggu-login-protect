@@ -14,6 +14,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+define('MAGGU_LOGIN_PROTECT_URL', plugin_dir_url( __FILE__ ));
+
 class MagguLoginProtect{
     public static function install(){
         global $wpdb;
@@ -40,10 +42,25 @@ class MagguLoginProtect{
     }
 
     public static function page(){
+        global $wpdb;
+
         include dirname( __FILE__ ) . "/templates/index.php";
+    }
+
+    public static function log( $username ){
+        global $wpdb;
+
+        $status = (int)('wp_login' == current_filter());
+
+        $wpdb->insert('maggu_login_protect', [
+            'user_login' => $username,
+            'status'     => $status
+        ], ['%s', '%d']);
     }
 }
 
 register_activation_hook( __FILE__, ['MagguLoginProtect','install']);
 
-add_action('admin_menu', ['MagguLoginProtect', 'menu']);
+add_action('admin_menu',      ['MagguLoginProtect', 'menu']);
+add_action('wp_login',        ['MagguLoginProtect', 'log']);
+add_action('wp_login_failed', ['MagguLoginProtect', 'log']);

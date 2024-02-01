@@ -1,4 +1,8 @@
 <link rel='stylesheet' href='<?php echo MAGGU_LOGIN_PROTECT_URL; ?>assets/style.css' media='all' />
+
+<?php
+$config = get_option('maggu-login-protect');
+?>
 <div id="maggu-login-protect">
     <div id="header" style="background: #fff;padding: 20px;margin-left: -20px;border-bottom: 1px solid #e1e1e1;">
         <img src="<?php echo MAGGU_LOGIN_PROTECT_URL; ?>assets/logo.png" style="width: 32px;float: right;background: #fff;margin-top: -5px;"/>
@@ -26,7 +30,7 @@
                 <div>
                     <label>Retention time:</label>
                     <i>days</i>
-                    <input name="retention_time" type="number" step="1" min="0" value="30">
+                    <input name="retention_time" type="number" step="1" min="0" value="<?php echo $config['retention_time']; ?>">
                     <span>The number of lockouts Solid Security must remember before permanently banning the attacker.</span>
                 </div>
             </section>
@@ -35,9 +39,15 @@
                 <div>
                     <label>Ban Threshold:</label>
                     <i>attempts</i>
-                    <input name="ban_threshold" type="number" step="1" min="0" value="15">
+                    <input name="ban_threshold" type="number" step="1" min="0" value="<?php echo $config['ban_threshold']; ?>">
                     <span>The number of days database logs should be kept.</span>
-                </div>
+                    <br /><br />
+                    
+                    <label>Ban Time:</label>
+                    <i>minutes</i>
+                    <input name="ban_time" type="number" step="1" min="0" value="<?php echo $config['ban_time']; ?>">
+                    <span>Login attempts blocking time</span>                    
+                </div>               
             </section>  
             
             <button class="btn-lg btn-primary" id="btn-configs-save"> Save </button>
@@ -65,7 +75,6 @@ jQuery('#btn-configs-save').click(function(){
         beforeSend:function() {
             $btn.addClass('loading');
             $btn.removeClass('error');
-            jQuery('#result').html('');
         },                
         success:function(data) {
             jQuery('#result').html(data);

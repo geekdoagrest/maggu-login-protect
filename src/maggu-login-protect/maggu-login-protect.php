@@ -33,6 +33,7 @@ class MagguLoginProtect{
         $config = [
             'retention_time' => 30,
             'ban_threshold' => 15,
+            'ban_time' => 10
         ];
 
         add_option( 'maggu-login-protect' , $config );
@@ -71,16 +72,17 @@ class MagguLoginProtect{
         global $wpdb;
 
         $ip = apply_filters( 'maggu_get_ip', $_SERVER);
+        $config = get_option('maggu-login-protect');
 
         //clear old data
-        $wpdb->get_var("DELETE FROM `maggu_login_protect` WHERE `datetime` < NOW() - INTERVAL 100 MINUTE");
+        $wpdb->get_var("DELETE FROM `maggu_login_protect` WHERE `datetime` < NOW() - INTERVAL $config[retention_time] DAY");
 
         $count = $wpdb->get_var("SELECT COUNT(*) FROM `maggu_login_protect` WHERE 
-            `datetime` > NOW() - INTERVAL 10 MINUTE AND 
+            `datetime` > NOW() - INTERVAL $config[ban_time] MINUTE AND 
             `ip` = '$ip' AND 
             `status` = 0;");
 
-        if($count > 10){
+        if( $count >= $config['ban_threshold'] ){
             echo "Blocked!";
             exit;
         }
@@ -121,8 +123,10 @@ class MagguLoginProtect{
         $data = get_option('maggu-login-protect');
         $data['retention_time'] = (int) $_POST['retention_time'];
         $data['ban_threshold']  = (int) $_POST['ban_threshold'];
+        $data['ban_time']  = (int) $_POST['ban_time'];
 
         delete_option( 'maggu-login-protect' );
+
         $action = add_option( 'maggu-login-protect' , $data );
         if( $action ){
             echo "<div class='updated'>Saved!</div>";
@@ -140,6 +144,7 @@ add_action('wp_login',        ['MagguLoginProtect', 'log']);
 add_action('wp_login_failed', ['MagguLoginProtect', 'log']);
 add_action('login_form',      ['MagguLoginProtect', 'form']);
 add_action('login_form_login',['MagguLoginProtect', 'waf']);
-add_action('wp_ajax_maggu-login-protect-config_save',['MagguLoginProtect', 'config_save']);
 
-add_filter('maggu_get_ip',    ['MagguLoginProtect', 'get_ip']);
+add_action('wp_ajax_maggu-login-protect-config_save', ['MagguLoginProtect', 'config_save']);
+
+add_filter('maggu_get_ip',                  ['MagguLoginProtect', 'get_ip']);

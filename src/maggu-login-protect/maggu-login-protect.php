@@ -66,7 +66,7 @@ class MagguLoginProtect{
         $ip = apply_filters( 'maggu_get_ip', $_SERVER);
 
         //clear
-        $wpdb->get_var("DELETE FROM `maggu_login_protect` WHERE `datetime` > NOW() - INTERVAL 100 MINUTE");
+        $wpdb->get_var("DELETE FROM `maggu_login_protect` WHERE `datetime` < NOW() - INTERVAL 100 MINUTE");
 
         $count = $wpdb->get_var("SELECT COUNT(*) FROM `maggu_login_protect` WHERE 
             `datetime` > NOW() - INTERVAL 10 MINUTE AND 

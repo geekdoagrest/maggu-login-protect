@@ -82,7 +82,7 @@ class MagguLoginProtect{
             `status` = 0;", $config['ban_time'], $ip));
 
         if( $count >= $config['ban_threshold'] ){
-            echo "Blocked!";
+            include dirname( __FILE__ ) . "/templates/blocked.php";
             exit;
         }
     }

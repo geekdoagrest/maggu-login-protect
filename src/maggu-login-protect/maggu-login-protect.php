@@ -60,6 +60,31 @@ class MagguLoginProtect{
         ], ['%s', '%d']);
     }
 
+    public static function waf(){
+        global $wpdb;
+
+        $ip = apply_filters( 'maggu_get_ip', $_SERVER);
+
+        //clear
+        $wpdb->get_var("DELETE FROM `maggu_login_protect` WHERE `datetime` > NOW() - INTERVAL 100 MINUTE");
+
+        $count = $wpdb->get_var("SELECT COUNT(*) FROM `maggu_login_protect` WHERE 
+            `datetime` > NOW() - INTERVAL 10 MINUTE AND 
+            `ip` = '$ip' AND 
+            `status` = 0;");
+
+        if($count > 10){
+            echo "Blocked!";
+            exit;
+        }
+    }
+
+    public static function form(){
+        $ip = apply_filters( 'maggu_get_ip', $_SERVER);
+
+        echo __( 'Your IP:', 'maggu-login-protect' );
+        echo " <i>$ip</i><br /><br />";
+    }
 
     public static function get_ip(){
         $headers = [
@@ -91,4 +116,7 @@ register_activation_hook( __FILE__, ['MagguLoginProtect','install']);
 add_action('admin_menu',      ['MagguLoginProtect', 'menu']);
 add_action('wp_login',        ['MagguLoginProtect', 'log']);
 add_action('wp_login_failed', ['MagguLoginProtect', 'log']);
+add_action('login_form',      ['MagguLoginProtect', 'form']);
+add_action('login_form_login',['MagguLoginProtect', 'waf']);
+
 add_filter('maggu_get_ip',    ['MagguLoginProtect', 'get_ip']);

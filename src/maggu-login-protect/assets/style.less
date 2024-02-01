@@ -6,6 +6,17 @@ body.settings_page_maggu-login-protect  #wpcontent #wpbody #wpbody-content > .no
         width: calc(100% - 20px - 420px);
         margin-top: 20px;        
     }
+    #result{
+        &:empty{
+            display: none;
+        }
+        .error, .updated{
+            margin: 0;
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px;            
+        }
+    }
     .container{
         background: #fff;
         border: 1px solid #D6D6D6;
@@ -19,7 +30,39 @@ body.settings_page_maggu-login-protect  #wpcontent #wpbody #wpbody-content > .no
             padding-top: 0;
         }  
         &.configs{
-            
+            section{
+                display: flex;
+                justify-content: space-between; 
+                border-top: 1px solid #eee;
+                &:first-of-type{
+                    border: 0;
+                    margin-top: -20px;
+                }
+                h3{
+                    padding: 20px;
+                    width: 300px;
+                    display: block;                    
+                }    
+                & > div{
+                    width: calc(100% - 340px);
+                    position: relative;
+                    padding: 20px;                    
+                    label{
+                        display: block;
+                        font-weight: 500;
+                        margin-bottom: 4px;                        
+                    }
+                    i{
+                        position: absolute;
+                        right: 40px;
+                        margin-top: 5px;
+                    }
+                    input{
+                        display: block;
+                        width: 100%;
+                    }
+                }           
+            }
         }     
         &.logs{
             background: #fffee4;
@@ -37,6 +80,32 @@ body.settings_page_maggu-login-protect  #wpcontent #wpbody #wpbody-content > .no
                     padding-left: 10px;
                 }
             }
+        }
+        .btn-primary{
+            background: #00dca7;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            font-size: 0.875rem;
+            padding: 0.95rem 1.2rem;
+            min-width: 6rem; 
+            float: right;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer; 
+
+            -webkit-transition: background-color 300ms linear;
+            -moz-transition: background-color 300ms linear;
+            -o-transition: background-color 300ms linear;
+            -ms-transition: background-color 300ms linear;
+            transition: background-color 300ms linear;
+
+            &:hover{
+                background: #06c194;
+            }
+            &.loading{                
+                background-image: url(loading.svg);
+                background-size: 45px;
+                color: #999;                
+            }            
         }
     }    
 }

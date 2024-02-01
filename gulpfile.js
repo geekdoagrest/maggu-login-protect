@@ -8,7 +8,7 @@ gulp.task('less', function () {
     .pipe(debug({title:'less'}))
     .pipe(less())
     .pipe(minifyCSS())
-    .pipe(gulp.dest('src/maggu-login-protect/css/'));
+    .pipe(gulp.dest('src/maggu-login-protect/assets/'));
 });
 
 gulp.task('watch', function() {

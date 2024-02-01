@@ -7,3 +7,4 @@ src/hello.php
 src/index.php
 src/amazon-s3-and-cloudfront
 node_modules
+src/better-wp-security

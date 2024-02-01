@@ -29,6 +29,13 @@ class MagguLoginProtect{
             `datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
             INDEX USING BTREE(`datetime`)
             ) ENGINE=MEMORY DEFAULT CHARSET=latin1;');
+
+        $config = [
+            'retention_time' => 30,
+            'ban_threshold' => 15,
+        ];
+
+        add_option( 'maggu-login-protect' , $config );
     }
 
     public static function menu(){
@@ -65,7 +72,7 @@ class MagguLoginProtect{
 
         $ip = apply_filters( 'maggu_get_ip', $_SERVER);
 
-        //clear
+        //clear old data
         $wpdb->get_var("DELETE FROM `maggu_login_protect` WHERE `datetime` < NOW() - INTERVAL 100 MINUTE");
 
         $count = $wpdb->get_var("SELECT COUNT(*) FROM `maggu_login_protect` WHERE 
@@ -109,6 +116,21 @@ class MagguLoginProtect{
         
         return $_SERVER['REMOTE_ADDR'];
     }
+
+    public static function config_save(){
+        $data = get_option('maggu-login-protect');
+        $data['retention_time'] = (int) $_POST['retention_time'];
+        $data['ban_threshold']  = (int) $_POST['ban_threshold'];
+
+        delete_option( 'maggu-login-protect' );
+        $action = add_option( 'maggu-login-protect' , $data );
+        if( $action ){
+            echo "<div class='updated'>Saved!</div>";
+        } else {
+            echo "<div class='error'>Error!</div>";
+        }        
+        exit;
+    }
 }
 
 register_activation_hook( __FILE__, ['MagguLoginProtect','install']);
@@ -118,5 +140,6 @@ add_action('wp_login',        ['MagguLoginProtect', 'log']);
 add_action('wp_login_failed', ['MagguLoginProtect', 'log']);
 add_action('login_form',      ['MagguLoginProtect', 'form']);
 add_action('login_form_login',['MagguLoginProtect', 'waf']);
+add_action('wp_ajax_maggu-login-protect-config_save',['MagguLoginProtect', 'config_save']);
 
 add_filter('maggu_get_ip',    ['MagguLoginProtect', 'get_ip']);

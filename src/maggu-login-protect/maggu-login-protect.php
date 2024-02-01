@@ -16,6 +16,8 @@ defined( 'ABSPATH' ) || exit;
 
 define('MAGGU_LOGIN_PROTECT_URL', plugin_dir_url( __FILE__ ));
 
+require dirname( __FILE__ ) . "/consts/options.php";
+
 class MagguLoginProtect{
     public static function install(){
         global $wpdb;
@@ -30,13 +32,7 @@ class MagguLoginProtect{
             INDEX USING BTREE(`datetime`)
             ) ENGINE=MEMORY DEFAULT CHARSET=latin1;');
 
-        $config = [
-            'retention_time' => 30,
-            'ban_threshold' => 15,
-            'ban_time' => 10
-        ];
-
-        add_option( 'maggu-login-protect' , $config );
+        add_option( 'maggu-login-protect' , MAGGU_LOGIN_PROTECT_CONFIGS );
     }
 
     public static function menu(){
@@ -65,7 +61,7 @@ class MagguLoginProtect{
             'user_login' => $username,
             'status'     => $status,
             'ip'         => $ip,
-        ], ['%s', '%d']);
+        ], ['%s', '%d', '%s']);
     }
 
     public static function waf(){
@@ -75,12 +71,15 @@ class MagguLoginProtect{
         $config = get_option('maggu-login-protect');
 
         //clear old data
-        $wpdb->get_var("DELETE FROM `maggu_login_protect` WHERE `datetime` < NOW() - INTERVAL $config[retention_time] DAY");
+        $wpdb->get_var( $wpdb->prepare(
+            "DELETE FROM `maggu_login_protect` WHERE `datetime` < NOW() - INTERVAL %d DAY", $config['retention_time']
+        ));
 
-        $count = $wpdb->get_var("SELECT COUNT(*) FROM `maggu_login_protect` WHERE 
-            `datetime` > NOW() - INTERVAL $config[ban_time] MINUTE AND 
-            `ip` = '$ip' AND 
-            `status` = 0;");
+        $count = $wpdb->get_var( $wpdb->prepare(
+            "SELECT COUNT(*) FROM `maggu_login_protect` WHERE 
+            `datetime` > NOW() - INTERVAL %d MINUTE AND 
+            `ip` = %s AND 
+            `status` = 0;", $config['ban_time'], $ip));
 
         if( $count >= $config['ban_threshold'] ){
             echo "Blocked!";
@@ -121,9 +120,9 @@ class MagguLoginProtect{
 
     public static function config_save(){
         $data = get_option('maggu-login-protect');
-        $data['retention_time'] = (int) $_POST['retention_time'];
-        $data['ban_threshold']  = (int) $_POST['ban_threshold'];
-        $data['ban_time']  = (int) $_POST['ban_time'];
+        foreach( MAGGU_LOGIN_PROTECT_CONFIGS as $key => $value ){
+            $data[$key] = $_POST[$key];
+        }
 
         delete_option( 'maggu-login-protect' );
 

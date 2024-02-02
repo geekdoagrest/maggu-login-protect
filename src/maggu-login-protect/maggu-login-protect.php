@@ -128,9 +128,9 @@ class MagguLoginProtect{
 
         $action = add_option( 'maggu-login-protect' , $data );
         if( $action ){
-            echo "<div class='updated'>Saved!</div>";
+            echo "<div class='updated'>".__('Saved!', 'maggu-login-protect' )."</div>";
         } else {
-            echo "<div class='error'>Error!</div>";
+            echo "<div class='error'>".__('Error!', 'maggu-login-protect' )."</div>";
         }        
         exit;
     }

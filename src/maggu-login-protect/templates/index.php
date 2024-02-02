@@ -24,39 +24,39 @@ $config = get_option('maggu-login-protect');
 
     <div class="panel">
         <div class="container configs">
-            <h2>Global Settings: </h2>
+            <h2><?php echo __('Global Settings:', 'maggu-login-protect' ); ?></h2>
             <section>
-                <h3>Logging:</h3>
+                <h3><?php echo __('Logging:', 'maggu-login-protect' ); ?></h3>
                 <div>
-                    <label>Retention time:</label>
-                    <i>days</i>
+                    <label><?php echo __('Retention time:', 'maggu-login-protect' ); ?></label>
+                    <i><?php echo __('days', 'maggu-login-protect' ); ?></i>
                     <input name="retention_time" type="number" step="1" min="0" value="<?php echo $config['retention_time']; ?>">
-                    <span>The number of lockouts Solid Security must remember before permanently banning the attacker.</span>
+                    <span><?php echo __('The number of lockouts Solid Security must remember before permanently banning the attacker.', 'maggu-login-protect' ); ?></span>
                 </div>
             </section>
             <section>
-                <h3>Lockouts:</h3>
+                <h3><?php echo __('Lockouts:', 'maggu-login-protect' ); ?></h3>
                 <div>
-                    <label>Ban Threshold:</label>
-                    <i>attempts</i>
+                    <label><?php echo __('Ban Threshold:', 'maggu-login-protect' ); ?></label>
+                    <i><?php echo __('attempts', 'maggu-login-protect' ); ?></i>
                     <input name="ban_threshold" type="number" step="1" min="0" value="<?php echo $config['ban_threshold']; ?>">
-                    <span>The number of days database logs should be kept.</span>
+                    <span><?php echo __('The number of days database logs should be kept.', 'maggu-login-protect' ); ?></span>
                     <br /><br />
                     
-                    <label>Ban Time:</label>
-                    <i>minutes</i>
+                    <label><?php echo __('Ban Time:', 'maggu-login-protect' ); ?></label>
+                    <i><?php echo __('minutes', 'maggu-login-protect' ); ?></i>
                     <input name="ban_time" type="number" step="1" min="0" value="<?php echo $config['ban_time']; ?>">
-                    <span>Login attempts blocking time</span>                    
+                    <span><?php echo __('Login attempts blocking time', 'maggu-login-protect' ); ?></span>                    
                 </div>               
             </section>  
             
-            <button class="btn-lg btn-primary" id="btn-configs-save"> Save </button>
+            <button class="btn-lg btn-primary" id="btn-configs-save"><?php echo __('Save', 'maggu-login-protect' ); ?></button>
         </div>
     <div>
     <div id="result"></div>
     <div id="footer">
         <p id="footer-left" class="alignleft">        
-		    <a href="https://github.com/worais/maggu-login-protect" target="_blank">Login Protect</a> is developed and maintained by <a href="https://maggu.org" target="_blank">Maggu</a>
+		    <a href="https://github.com/worais/maggu-login-protect" target="_blank">Login Protect</a> <?php echo __('is developed and maintained by', 'maggu-login-protect' ); ?> <a href="https://maggu.org" target="_blank">Maggu</a>
         </p>
     </div>
 <div>

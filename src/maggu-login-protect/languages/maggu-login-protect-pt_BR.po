@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: maggu-login-protect\n"
 "POT-Creation-Date: 2023-11-07 09:53-0300\n"
-"PO-Revision-Date: 2024-02-02 20:00-0300\n"
+"PO-Revision-Date: 2024-02-02 20:05-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Language: pt_BR\n"
@@ -56,7 +56,7 @@ msgid "Time in days that we must save the data."
 msgstr "Tempo em dias que devemos guardar os dados."
 
 msgid "Number of attempts to block the attacker."
-msgstr "Numero de tentativas para bloquear o invasor."
+msgstr "Numero de tentativas antes de bloquear o invasor."
 
 msgid "is developed and maintained by"
 msgstr "é desenvolvido e mantido por"
@@ -71,7 +71,7 @@ msgid "Global Settings:"
 msgstr "Configurações:"
 
 msgid "Logs:"
-msgstr "Registros:"
+msgstr "Histórico:"
 
 msgid "Login Protect"
 msgstr "Proteção de login"
@@ -81,3 +81,6 @@ msgstr "dias"
 
 msgid "attempts"
 msgstr "tentativas"
+
+msgid "Ban Threshold:"
+msgstr "Tentativas:"

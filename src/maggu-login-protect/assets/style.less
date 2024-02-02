@@ -101,10 +101,23 @@ body.settings_page_maggu-login-protect  #wpcontent #wpbody #wpbody-content > .no
             &:hover{
                 background: #06c194;
             }
-            &.loading{                
-                background-image: url(loading.svg);
-                background-size: 45px;
-                color: #999;                
+            position: relative;
+            .spinner{
+                display: none;
+                position: absolute;
+                left: 50%;
+                margin-top: -2px;
+                margin-left: -10px;
+            }
+            &.loading{    
+                pointer-events: none;             
+                background: url(images/spinner.gif) no-repeat;
+                background-size: 20px 20px;
+                background-position: center;
+                color: #f0f0f100; 
+                .spinner{
+                    display: block;
+                }               
             }            
         }
     }    

@@ -50,7 +50,7 @@ $config = get_option('maggu-login-protect');
                 </div>               
             </section>  
             
-            <button class="btn-lg btn-primary" id="btn-configs-save"><?php echo __('Save', 'maggu-login-protect' ); ?></button>
+            <button class="btn-lg btn-primary" id="btn-configs-save"><span class="spinner is-active"></span><?php echo __('Save', 'maggu-login-protect' ); ?></button>
         </div>
     <div>
     <div id="result"></div>
@@ -80,7 +80,6 @@ jQuery('#btn-configs-save').click(function(){
             jQuery('#result').html(data);
         },   
         error:function(xhr, ajaxOptions, thrownError) {
-            $btn.addClass('error');
             jQuery('#result').html(`<div class='error'>${thrownError}</div>`);
         },
         complete:function() {

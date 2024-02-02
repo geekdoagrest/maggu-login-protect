@@ -37,7 +37,7 @@ class MagguLoginProtect{
 
     public static function menu(){
 		add_options_page(
-			__( 'Maggu: Login Protect', 'maggu-login-protect' ),
+			__( 'Login Protect', 'maggu-login-protect' ),
 			__( 'Login Protect', 'maggu-login-protect' ),
 			'manage_options',
 			'maggu-login-protect',
@@ -134,6 +134,10 @@ class MagguLoginProtect{
         }        
         exit;
     }
+
+	public static function load_plugin_textdomain() {
+		load_plugin_textdomain( 'maggu-login-protect', false, basename( dirname( __FILE__ ) ) . '/languages/' );
+	}    
 }
 
 register_activation_hook( __FILE__, ['MagguLoginProtect','install']);
@@ -143,6 +147,7 @@ add_action('wp_login',        ['MagguLoginProtect', 'log']);
 add_action('wp_login_failed', ['MagguLoginProtect', 'log']);
 add_action('login_form',      ['MagguLoginProtect', 'form']);
 add_action('login_form_login',['MagguLoginProtect', 'waf']);
+add_action( 'plugins_loaded', ['MagguLoginProtect', 'load_plugin_textdomain'] );
 
 add_action('wp_ajax_maggu-login-protect-config_save', ['MagguLoginProtect', 'config_save']);
 

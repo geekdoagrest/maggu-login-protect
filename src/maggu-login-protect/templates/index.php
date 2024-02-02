@@ -6,10 +6,10 @@ $config = get_option('maggu-login-protect');
 <div id="maggu-login-protect">
     <div id="header" style="background: #fff;padding: 20px;margin-left: -20px;border-bottom: 1px solid #e1e1e1;">
         <img src="<?php echo MAGGU_LOGIN_PROTECT_URL; ?>assets/logo.png" style="width: 32px;float: right;background: #fff;margin-top: -5px;"/>
-        <h1 style="margin: 0;color: #333;">Login Protect</h1>    
+        <h1 style="margin: 0;color: #333;"><?php echo __('Login Protect', 'maggu-login-protect' ); ?></h1>    
     </div>
     <div class="container logs">
-        <h2>Logs: </h2>
+        <h2><?php echo __('Logs:', 'maggu-login-protect' ); ?></h2>
         <ul>
             <?php    
             $logs = $wpdb->get_results("SELECT * FROM `maggu_login_protect` ORDER BY `datetime` DESC");
@@ -31,7 +31,7 @@ $config = get_option('maggu-login-protect');
                     <label><?php echo __('Retention time:', 'maggu-login-protect' ); ?></label>
                     <i><?php echo __('days', 'maggu-login-protect' ); ?></i>
                     <input name="retention_time" type="number" step="1" min="0" value="<?php echo $config['retention_time']; ?>">
-                    <span><?php echo __('The number of lockouts Solid Security must remember before permanently banning the attacker.', 'maggu-login-protect' ); ?></span>
+                    <span><?php echo __('Time in days that we must save the data.', 'maggu-login-protect' ); ?></span>
                 </div>
             </section>
             <section>
@@ -40,7 +40,7 @@ $config = get_option('maggu-login-protect');
                     <label><?php echo __('Ban Threshold:', 'maggu-login-protect' ); ?></label>
                     <i><?php echo __('attempts', 'maggu-login-protect' ); ?></i>
                     <input name="ban_threshold" type="number" step="1" min="0" value="<?php echo $config['ban_threshold']; ?>">
-                    <span><?php echo __('The number of days database logs should be kept.', 'maggu-login-protect' ); ?></span>
+                    <span><?php echo __('Number of attempts to block the attacker.', 'maggu-login-protect' ); ?></span>
                     <br /><br />
                     
                     <label><?php echo __('Ban Time:', 'maggu-login-protect' ); ?></label>

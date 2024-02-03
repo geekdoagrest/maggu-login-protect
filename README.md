@@ -10,7 +10,7 @@
 
 The Maggu Login Protect plugin is an effective tool to enhance the security of your WordPress site, safeguarding it against brute force attacks and ensuring the integrity of user accounts. This plugin monitors and controls failed login attempts, implementing proactive measures to mitigate potential threats.
 
-## Key Features
+## Features
 
 - **Intelligent Login Attempts Control:** Detects and logs failed login attempts, analyzing behavioral patterns to identify possible attacks.
 

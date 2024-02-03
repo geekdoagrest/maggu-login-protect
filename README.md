@@ -23,7 +23,7 @@ Maggu Login Protect plugin is an effective tool to enhance the security of your 
 ## Installation
 
 1. Install this plugin using WordPress' built-in installer
-2. Access the *Login Protect* option under *Settings*
+2. Access the **Login Protect** option under **Settings**
 3. Follow the instructions to set up and configure
 
 ## Support

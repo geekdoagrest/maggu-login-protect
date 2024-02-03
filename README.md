@@ -35,3 +35,5 @@ If you encounter issues or have improvement suggestions, please [open an issue](
 Contributions are welcome! Feel free to fork the project and submit pull requests.
 
 ## Screenshots
+![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/1.png?raw=true)
+![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/2.png?raw=true)

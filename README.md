@@ -28,11 +28,11 @@ The Maggu Login Protect plugin is an effective tool to enhance the security of y
 
 ## Support
 
-If you encounter issues or have improvement suggestions, please [open an issue](link to the issue repository).
+If you encounter issues or have improvement suggestions, please [open an issue](https://github.com/worais/maggu-login-protect/issues).
 
 ## Contributions
 
-Contributions are welcome! Feel free to fork the project and submit pull requests.
+Contributions are welcome! Feel free to fork the project and submit [pull requests](https://github.com/worais/maggu-login-protect/pulls).
 
 ## Screenshots
 ![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/1.png?raw=true)

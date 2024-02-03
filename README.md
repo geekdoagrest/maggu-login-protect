@@ -1,14 +1,14 @@
 # Maggu Login Protect
 
 **Contributors:** worais \
-**Tags:** wordpress, login, waf, \
+**Tags:** wordpress, login, waf, ddos \
 **Requires at least:** 5.5 \
 **Tested up to:** 6.4 \
 **Requires PHP:** 7.2 \
 **Stable tag:** 3.2.6 \
 **License:** GPLv3
 
-The Maggu Login Protect plugin is an effective tool to enhance the security of your WordPress site, safeguarding it against brute force attacks and ensuring the integrity of user accounts. This plugin monitors and controls failed login attempts, implementing proactive measures to mitigate potential threats.
+Maggu Login Protect plugin is an effective tool to enhance the security of your WordPress site, safeguarding it against brute force attacks and ensuring the integrity of user accounts. This plugin monitors and controls failed login attempts, implementing proactive measures to mitigate potential threats.
 
 ## Features
 
@@ -37,3 +37,4 @@ Contributions are welcome! Feel free to fork the project and submit [pull reques
 ## Screenshots
 ![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/1.png?raw=true)
 ![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/2.png?raw=true)
+![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/3.png?raw=true)

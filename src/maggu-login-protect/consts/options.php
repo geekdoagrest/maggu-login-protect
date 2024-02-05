@@ -1,8 +1,10 @@
 <?php
 define('MAGGU_LOGIN_PROTECT_CONFIGS', [
-    'retention_time' => 30,
-    'ban_threshold'  => 15,
-    'ban_time'       => 10
+    'retention_time'    => 30,
+    'ban_threshold'     => 15,
+    'ban_time'          => 10,
+    'captcha_show' => 1,
+    'captcha_threshold' => 2
 ]);
 
 define('MAGGU_LOGIN_PROTECT_CAPTCHA', [

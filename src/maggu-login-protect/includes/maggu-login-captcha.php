@@ -74,7 +74,7 @@ class MagguLoginCaptcha{
       }
   
       if (isset($_SESSION['captcha_code']) && esc_html($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code'])) {
-        return $errors . '<label id="capt_err" for="captcha_code_error">' . esc_html__('Captcha confirmation error!', 'maggu-login-protect') . '</label>';
+        return '<label>' . esc_html__('Captcha confirmation error!', 'maggu-login-protect') . '</label>';
       }
 
       return $errors;
@@ -88,7 +88,7 @@ class MagguLoginCaptcha{
         wp_clear_auth_cookie();
 
         MagguLoginProtect::log( $_REQUEST['log'] );
-        
+
         return $_SERVER["REQUEST_URI"] . "/?captcha='confirm_error'";
       }
       

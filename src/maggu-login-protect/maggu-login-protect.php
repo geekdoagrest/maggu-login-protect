@@ -18,7 +18,6 @@ define('MAGGU_LOGIN_PROTECT_URL', plugin_dir_url( __FILE__ ));
 define('MAGGU_LOGIN_PROTECT_DIR', dirname( __FILE__ ));
 
 require MAGGU_LOGIN_PROTECT_DIR . "/consts/options.php";
-require MAGGU_LOGIN_PROTECT_DIR . "/includes/maggu-login-captcha.php";
 
 class MagguLoginProtect{
     public static function install(){
@@ -88,6 +87,10 @@ class MagguLoginProtect{
         if( $count >= $config['ban_threshold'] ){
             include dirname( __FILE__ ) . "/templates/blocked.php";
             exit;
+        }
+
+        if( (bool)$config['captcha_show'] ){
+            require MAGGU_LOGIN_PROTECT_DIR . "/includes/maggu-login-captcha.php";
         }
     }
 

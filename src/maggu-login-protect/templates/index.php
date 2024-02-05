@@ -49,7 +49,21 @@ $config = get_option('maggu-login-protect');
                     <span><?php echo __('Login attempts blocking time', 'maggu-login-protect' ); ?></span>                    
                 </div>               
             </section>  
-            
+            <section>
+                <h3><?php echo __('Captcha:', 'maggu-login-protect' ); ?></h3>
+                <div>
+                    <input type="checkbox" name="captcha_show" <?php echo ($config['captcha_show']) ? 'checked' : ''; ?>>
+                    <label><?php echo __('Use Captcha:', 'maggu-login-protect' ); ?></label>
+                    <br /><br />
+
+                    <label><?php echo __('Show after:', 'maggu-login-protect' ); ?></label>
+                    <i><?php echo __('attempts', 'maggu-login-protect' ); ?></i>
+                    <input name="captcha_threshold" type="number" step="1" min="0" value="<?php echo $config['captcha_threshold']; ?>">
+                    <span><?php echo __('Number of failed attempts before showing the captcha', 'maggu-login-protect' ); ?></span>
+                </div>
+            </section>            
+
+
             <button class="btn-lg btn-primary" id="btn-configs-save"><span class="spinner is-active"></span><?php echo __('Save', 'maggu-login-protect' ); ?></button>
         </div>
     <div>
@@ -65,7 +79,11 @@ jQuery('#btn-configs-save').click(function(){
     const $btn = jQuery(this);
     const data = { action: 'maggu-login-protect-config_save' };
     jQuery('#maggu-login-protect .configs').find('input, textarea, select').each(function(x, field) {
-        data[field.name] = field.value;
+        if(field.type == 'checkbox'){
+            data[field.name] = (field.checked)? 1 : 0;
+        } else {
+            data[field.name] = field.value;
+        }
     });
 
     jQuery.ajax({

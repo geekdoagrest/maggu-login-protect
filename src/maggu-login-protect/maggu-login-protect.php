@@ -15,8 +15,10 @@
 defined( 'ABSPATH' ) || exit;
 
 define('MAGGU_LOGIN_PROTECT_URL', plugin_dir_url( __FILE__ ));
+define('MAGGU_LOGIN_PROTECT_DIR', dirname( __FILE__ ));
 
-require dirname( __FILE__ ) . "/consts/options.php";
+require MAGGU_LOGIN_PROTECT_DIR . "/consts/options.php";
+require MAGGU_LOGIN_PROTECT_DIR . "/includes/maggu-login-captcha.php";
 
 class MagguLoginProtect{
     public static function install(){
@@ -48,11 +50,13 @@ class MagguLoginProtect{
     public static function page(){
         global $wpdb;
 
-        include dirname( __FILE__ ) . "/templates/index.php";
+        include MAGGU_LOGIN_PROTECT_DIR . "/templates/index.php";
     }
 
     public static function log( $username ){
         global $wpdb;
+
+        if(empty($username )){ return false; }
 
         $status = (int)('wp_login' == current_filter());
         $ip = apply_filters( 'maggu_get_ip', $_SERVER);
@@ -137,7 +141,15 @@ class MagguLoginProtect{
 
 	public static function load_plugin_textdomain() {
 		load_plugin_textdomain( 'maggu-login-protect', false, basename( dirname( __FILE__ ) ) . '/languages/' );
-	}    
+	}  
+
+    public static function load_plugin_action_links($links){
+      $settings_link = '<a href="' . admin_url('options-general.php?page=maggu-login-protect') . '" title="Settings">Settings</a>';
+  
+      array_unshift($links, $settings_link);
+  
+      return $links;
+    } 
 }
 
 register_activation_hook( __FILE__, ['MagguLoginProtect','install']);
@@ -145,10 +157,11 @@ register_activation_hook( __FILE__, ['MagguLoginProtect','install']);
 add_action('admin_menu',      ['MagguLoginProtect', 'menu']);
 add_action('wp_login',        ['MagguLoginProtect', 'log']);
 add_action('wp_login_failed', ['MagguLoginProtect', 'log']);
-add_action('login_form',      ['MagguLoginProtect', 'form']);
 add_action('login_form_login',['MagguLoginProtect', 'waf']);
-add_action( 'plugins_loaded', ['MagguLoginProtect', 'load_plugin_textdomain'] );
+add_action('login_form',      ['MagguLoginProtect', 'form']);
+add_action('plugins_loaded',  ['MagguLoginProtect', 'load_plugin_textdomain'] );
 
 add_action('wp_ajax_maggu-login-protect-config_save', ['MagguLoginProtect', 'config_save']);
 
 add_filter('maggu_get_ip',                  ['MagguLoginProtect', 'get_ip']);
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), ['MagguLoginProtect', 'load_plugin_action_links']);

@@ -89,7 +89,7 @@ class MagguLoginProtect{
             exit;
         }
 
-        if( (bool)$config['captcha_show'] ){
+        if( (bool) $config['captcha_show'] ){
             require MAGGU_LOGIN_PROTECT_DIR . "/includes/maggu-login-captcha.php";
         }
     }

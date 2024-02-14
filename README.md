@@ -38,3 +38,15 @@ Contributions are welcome! Feel free to fork the project and submit [pull reques
 ![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/1.png?raw=true)
 ![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/2.png?raw=true)
 ![](https://github.com/worais/maggu-login-protect/blob/main/screenshots/3.png?raw=true)
+
+## Running Tests
+
+To execute the unit tests for Login Protect, you can use Docker Compose. Make sure you have Docker and Docker Compose installed on your system.
+
+1. Open a terminal and navigate to the root directory of the repository.
+
+2. Run the following command to start the tests:
+
+   ```bash
+   docker-compose run wordpress php vendor/bin/phpunit
+   ```

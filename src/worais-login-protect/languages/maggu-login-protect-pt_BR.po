@@ -1,8 +1,8 @@
-# Copyright (C) 2019 Maggu
+# Copyright (C) 2019 Worais
 # This file is distributed under the GPLv3 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: maggu-login-protect\n"
+"Project-Id-Version: worais-login-protect\n"
 "POT-Creation-Date: 2023-11-07 09:53-0300\n"
 "PO-Revision-Date: 2024-02-02 20:21-0300\n"
 "Last-Translator: \n"
@@ -17,10 +17,10 @@ msgstr ""
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SearchPath-0: templates\n"
 "X-Poedit-SearchPath-1: includes\n"
-"X-Poedit-SearchPath-2: maggu-login-protect.php\n"
+"X-Poedit-SearchPath-2: worais-login-protect.php\n"
 
-msgid "Maggu"
-msgstr "Maggu"
+msgid "Worais"
+msgstr "Worais"
 
 msgid "Saved!"
 msgstr "Salvo!"

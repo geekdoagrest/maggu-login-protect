@@ -1,5 +1,5 @@
 {
-  "name": "maggu-login-protect",
+  "name": "worais-login-protect",
   "version": "1.0.0",
   "description": "Protect WordPress from unwanted login attempts",
   "main": "gulpfile.js",

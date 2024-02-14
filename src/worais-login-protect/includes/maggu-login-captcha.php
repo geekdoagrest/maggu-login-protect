@@ -4,7 +4,7 @@
     thanks WebFactory Ltd ;)
 */
 session_start();
-class MagguLoginCaptcha{
+class WoraisLoginCaptcha{
     public static function captcha_for_login(){
         self::captcha_image_generate();
 
@@ -31,7 +31,7 @@ class MagguLoginCaptcha{
     } 
 
     private static function captcha_image_generate(){
-        $options = MAGGU_LOGIN_PROTECT_CAPTCHA;
+        $options = WORAIS_LOGIN_PROTECT_CAPTCHA;
         $possible_letters = array_merge(range('A', 'Z'), range('0', '9'));
         shuffle($possible_letters);
 
@@ -74,7 +74,7 @@ class MagguLoginCaptcha{
       }
   
       if (isset($_SESSION['captcha_code']) && esc_html($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code'])) {
-        return '<label>' . esc_html__('Captcha confirmation error!', 'maggu-login-protect') . '</label>';
+        return '<label>' . esc_html__('Captcha confirmation error!', 'worais-login-protect') . '</label>';
       }
 
       return $errors;
@@ -84,10 +84,10 @@ class MagguLoginCaptcha{
       if(!isset($_REQUEST['log'])){ return false; }
 
       if (empty($_REQUEST['captcha_code']) || (isset($_SESSION['captcha_code']) && esc_html($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code']))) {
-        $_SESSION['captcha_error'] = esc_html__('Incorrect captcha confirmation!', 'maggu-login-protect');
+        $_SESSION['captcha_error'] = esc_html__('Incorrect captcha confirmation!', 'worais-login-protect');
         wp_clear_auth_cookie();
 
-        MagguLoginProtect::log( $_REQUEST['log'] );
+        WoraisLoginProtect::log( $_REQUEST['log'] );
 
         return $_SERVER["REQUEST_URI"] . "/?captcha='confirm_error'";
       }
@@ -96,6 +96,6 @@ class MagguLoginCaptcha{
     } 
 }
 
-add_action('login_form',      ['MagguLoginCaptcha', 'captcha_for_login']);
-add_filter('login_errors',    ['MagguLoginCaptcha', 'captcha_login_errors']);
-add_filter('login_redirect',  ['MagguLoginCaptcha', 'captcha_login_redirect'], 10, 3);
+add_action('login_form',      ['WoraisLoginCaptcha', 'captcha_for_login']);
+add_filter('login_errors',    ['WoraisLoginCaptcha', 'captcha_login_errors']);
+add_filter('login_redirect',  ['WoraisLoginCaptcha', 'captcha_login_redirect'], 10, 3);

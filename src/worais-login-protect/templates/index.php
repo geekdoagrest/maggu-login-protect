@@ -23,9 +23,17 @@ $config = get_option('worais-login-protect');
     </div>
 
     <div class="panel">
+        <?php
+            $logins = $wpdb->get_results("SELECT DATE(`datetime`) as day, `status`, COUNT(*) as sum
+                FROM `worais_login_protect`
+                GROUP BY day, `status`
+                ORDER BY day, `status`;");
+
+            if(is_array($logins) && !empty($logins)){
+        ?>          
         <div class="container summary">
             <canvas id="summaryChart" style="max-height: 300px;"></canvas>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>          
             <script>
             const ctx = document.getElementById('summaryChart');
 
@@ -33,13 +41,26 @@ $config = get_option('worais-login-protect');
                 type: 'line',
                 data: {
                     datasets: [
-                        {label: 'Logins', data: [{x: '2016-12-25', y: 20}, {x: '2016-12-26', y: 10}]},
-                        {label: 'Lockouts', data: [{x: '2016-12-25', y: 20}, {x: '2016-12-26', y: 10}]}
+                        {label: 'Logins', data: [
+                            <?php
+                                foreach ($logins as $log) {
+                                    if($log->status == 1) { echo "{x: '$log->day', y: $log->sum},"; }
+                                }
+                            ?>]
+                        },
+                        {label: 'Lockouts', data: [
+                            <?php
+                                foreach ($logins as $log) {
+                                    if($log->status == 0) { echo "{x: '$log->day', y: $log->sum},"; }
+                                }
+                            ?>]
+                        }
                     ]
                 },
             });
             </script>            
         </div>
+        <?php } ?>
         <div class="container configs">
             <h2><?php echo __('Settings:', 'worais-login-protect' ); ?></h2>
             <section>

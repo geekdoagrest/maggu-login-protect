@@ -13,11 +13,16 @@ $config = get_option('worais-login-protect');
         <ul>
             <?php    
             $logs = $wpdb->get_results("SELECT * FROM `worais_login_protect` ORDER BY `datetime` DESC LIMIT 100");
-            foreach ($logs as $log) {
-                $color = ($log->status == 0)? '#900' : '#090';
 
-                echo "<li style='color: $color;'>[$log->ip -> $log->datetime]: $log->user_login</li>";
-            }
+            if(is_array($logs) && empty($logs)){
+                echo '<li class="empty"></li>';
+            } else {
+                foreach ($logs as $log) {
+                    $color = ($log->status == 0)? '#900' : '#090';
+
+                    echo "<li style='color: $color;'>[$log->ip -> $log->datetime]: $log->user_login</li>";
+                }
+            }            
             ?>
         </ul>
     </div>

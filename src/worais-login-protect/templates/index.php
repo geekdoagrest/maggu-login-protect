@@ -12,7 +12,7 @@ $config = get_option('worais-login-protect');
         <h2><?php echo __('Logs:', 'worais-login-protect' ); ?></h2>
         <ul>
             <?php    
-            $logs = $wpdb->get_results("SELECT * FROM `worais_login_protect` ORDER BY `datetime` DESC");
+            $logs = $wpdb->get_results("SELECT * FROM `worais_login_protect` ORDER BY `datetime` DESC LIMIT 100");
             foreach ($logs as $log) {
                 $color = ($log->status == 0)? '#900' : '#090';
 
@@ -23,8 +23,25 @@ $config = get_option('worais-login-protect');
     </div>
 
     <div class="panel">
+        <div class="container summary">
+            <canvas id="summaryChart" style="max-height: 300px;"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+            const ctx = document.getElementById('summaryChart');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {label: 'Logins', data: [{x: '2016-12-25', y: 20}, {x: '2016-12-26', y: 10}]},
+                        {label: 'Lockouts', data: [{x: '2016-12-25', y: 20}, {x: '2016-12-26', y: 10}]}
+                    ]
+                },
+            });
+            </script>            
+        </div>
         <div class="container configs">
-            <h2><?php echo __('Global Settings:', 'worais-login-protect' ); ?></h2>
+            <h2><?php echo __('Settings:', 'worais-login-protect' ); ?></h2>
             <section>
                 <h3><?php echo __('Logging:', 'worais-login-protect' ); ?></h3>
                 <div>

@@ -24,5 +24,5 @@ jobs:
        - run: cd src/ && zip -r ../../worais-login-protect.zip worais-login-protect
        - uses: actions/upload-artifact@v1
          with:
-           name: woocommerce-malga-payments
+           name: worais-login-protect
            path: ${{ github.workspace }}/src/

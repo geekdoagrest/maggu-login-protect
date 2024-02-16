@@ -2,6 +2,7 @@
 
 <?php
 $config = get_option('worais-login-protect');
+$config = apply_filters('worais-login-protect-config', $config);
 ?>
 <div id="worais-login-protect">
     <div id="header" style="background: #fff;padding: 20px;margin-left: -20px;border-bottom: 1px solid #e1e1e1;">

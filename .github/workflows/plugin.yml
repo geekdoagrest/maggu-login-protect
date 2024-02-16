@@ -10,7 +10,7 @@ jobs:
        - uses: michaelw90/PHP-Lint@master         
    build:
      runs-on: ubuntu-latest
-     needs: [tests, lint]     
+     needs: [lint]     
 
      steps:
        - uses: actions/checkout@v2

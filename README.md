@@ -20,6 +20,8 @@ Worais Login Protect plugin is an effective tool to enhance the security of your
 
 - **Detailed Logs:** Maintain a detailed log of all activities related to login attempts, providing valuable insights for security analysis.
 
+- **Captcha** Native integration of a captcha challenge for an additional layer of security. Requires users to prove they are not automated bots before accessing the login page.
+
 ## Installation
 
 1. Install this plugin using WordPress' built-in installer

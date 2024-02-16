@@ -1,0 +1,42 @@
+name: APP
+
+on: push
+
+jobs:
+   tests:
+     runs-on: ubuntu-latest
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v2
+       - name: Composer
+         uses: php-actions/composer@v5
+         with:
+           php_version: "7.4"
+           args: "--ignore-platform-reqs --optimize-autoloader"        
+       - name: Running tests
+         uses: php-actions/phpunit@v3
+         with:
+           version: 9.5
+   lint:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v1
+       - uses: michaelw90/PHP-Lint@master         
+   build:
+     runs-on: ubuntu-latest
+     needs: [tests, lint]     
+
+     steps:
+       - uses: actions/checkout@v2
+       - uses: actions/setup-node@v1    
+         with:
+           node-version: 8
+       - run: npm install
+       - run: npm run build 
+       - run: cp README.md src/worais-login-protect/README.md
+       - run: cp CHANGELOG.md src/worais-login-protect/CHANGELOG.md       
+       - run: cd src/ && zip -r ../../worais-login-protect.zip worais-login-protect
+       - uses: actions/upload-artifact@v1
+         with:
+           name: woocommerce-malga-payments
+           path: ${{ github.workspace }}/src/

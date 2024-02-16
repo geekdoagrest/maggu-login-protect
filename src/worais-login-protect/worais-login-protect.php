@@ -69,7 +69,6 @@ class WORAISLoginProtect{
 
     public static function waf(){
         global $wpdb;
-
         $ip = apply_filters( 'worais_get_ip', $_SERVER);
         $config = get_option('worais-login-protect');
         $config = apply_filters( 'worais-login-protect-config', $config);

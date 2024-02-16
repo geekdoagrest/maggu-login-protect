@@ -4,7 +4,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MalgaPayments\\": "src/"
+            "Worais\\": "src/worais-login-protect/"
         }
     },
     "require": {

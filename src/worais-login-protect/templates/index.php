@@ -96,7 +96,7 @@ $config = get_option('worais-login-protect');
                 <h3><?php echo __('Captcha:', 'worais-login-protect' ); ?></h3>
                 <div>
                     <input type="checkbox" name="captcha_show" <?php echo ($config['captcha_show']) ? 'checked' : ''; ?>>
-                    <label><?php echo __('Use Captcha:', 'worais-login-protect' ); ?></label>
+                    <label><?php echo __('Enable:', 'worais-login-protect' ); ?></label>
                     <br /><br />
 
                     <label><?php echo __('Show after:', 'worais-login-protect' ); ?></label>
@@ -111,7 +111,7 @@ $config = get_option('worais-login-protect');
         </div>
     <div>
     <div id="result"></div>
-    <div id="footer">
+    <div id="footer" class="worais-footer">
         <p id="footer-left" class="alignleft">        
 		    <a href="https://github.com/worais/worais-login-protect" target="_blank">Login Protect</a> <?php echo __('is developed and maintained by', 'worais-login-protect' ); ?> <a href="https://worais.com" target="_blank">Worais</a>
         </p>

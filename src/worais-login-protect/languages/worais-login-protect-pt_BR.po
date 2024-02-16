@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: worais-login-protect\n"
 "POT-Creation-Date: 2023-11-07 09:53-0300\n"
-"PO-Revision-Date: 2024-02-02 20:21-0300\n"
+"PO-Revision-Date: 2024-02-16 12:27-0300\n"
 "Last-Translator: \n"
 "Language-Team: pt_BR <LL@li.org>\n"
 "Language: pt_BR\n"
@@ -84,3 +84,24 @@ msgstr "tentativas"
 
 msgid "Ban Threshold:"
 msgstr "Tentativas:"
+
+msgid "Show after:"
+msgstr "Mostrar depois de:"
+
+msgid "Number of failed attempts before showing the captcha"
+msgstr "Número de tentativas fracassadas antes de mostrar o captcha"
+
+msgid "Enable:"
+msgstr "Habilitar:"
+
+msgid "Settings:"
+msgstr "Configurações:"
+
+msgid "Type the text displayed above:"
+msgstr "Digite o texto exibido acima:"
+
+msgid "Captcha confirmation error!"
+msgstr "Erro de confirmação do Captcha!"
+
+msgid "Validation is mandatory!"
+msgstr "A validação é obrigatória!"

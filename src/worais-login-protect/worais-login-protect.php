@@ -89,7 +89,7 @@ class WORAISLoginProtect{
             exit;
         }
 
-        if( (bool) $config['captcha_show'] ){
+        if( (bool) $config['captcha_show'] && $count >= $config['captcha_threshold'] ){
             require WORAIS_LOGIN_PROTECT_DIR . "/includes/worais-login-captcha.php";
         }
     }

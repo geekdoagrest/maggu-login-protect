@@ -1,6 +1,6 @@
 <?php
 /*
-    Extracted and adapted from: https://wordpress.org/plugins/captcha-code-authentication/
+    Extracted and adapted from: https://wordpress.org/plugins/worais-login-protect/
     thanks WebFactory Ltd ;)
 */
 session_start();
@@ -8,7 +8,7 @@ class WoraisLoginCaptcha{
     public static function captcha_for_login(){
         self::captcha_image_generate();
 
-        echo '<label>' . esc_html__('Type the text displayed above', 'captcha-code-authentication') . ':</label>
+        echo '<label>' . esc_html__('Type the text displayed above:', 'worais-login-protect') . '</label>
                 <input id="captcha_code" name="captcha_code" size="15" type="text" tabindex="30" />
                 </p>';
 
@@ -71,6 +71,10 @@ class WoraisLoginCaptcha{
     public static function captcha_login_errors($errors){
       if (isset($_REQUEST['action']) && 'register' == sanitize_text_field($_REQUEST['action'])) {
         return ($errors);
+      }
+
+      if (isset($_SESSION['captcha_code']) && !isset($_REQUEST['captcha_code'])){
+        return '<label>' . esc_html__('Validation is mandatory!', 'worais-login-protect') . '</label>';
       }
   
       if (isset($_SESSION['captcha_code']) && esc_html($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code'])) {

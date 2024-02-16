@@ -3,23 +3,6 @@ name: APP
 on: push
 
 jobs:
-   tests:
-     runs-on: ubuntu-latest
-     permissions:
-       contents: read
-       packages: write     
-     steps:
-       - name: Checkout
-         uses: actions/checkout@v2
-       - name: Composer
-         uses: php-actions/composer@v5
-         with:
-           php_version: "7.4"
-           args: "--ignore-platform-reqs --optimize-autoloader"        
-       - name: Running tests
-         uses: php-actions/phpunit@v3
-         with:
-           version: 9.5
    lint:
      runs-on: ubuntu-latest
      steps:

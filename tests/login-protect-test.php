@@ -1,7 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require_once dirname(__FILE__) . '/../wp-load.php';
 require_once dirname(__FILE__) . '/../wp-content/plugins/worais-login-protect/worais-login-protect.php';
 
 class LoginProtectTest extends TestCase{

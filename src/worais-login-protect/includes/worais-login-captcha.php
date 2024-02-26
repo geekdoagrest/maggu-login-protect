@@ -55,7 +55,7 @@ class WoraisLoginCaptcha{
         );
 
         for ($i = 0; $i < $options['random_lines']; $i++)
-          imageline($image, mt_rand(0, $options['width']), mt_rand(0, $options['height']), mt_rand(0, $options['width']), mt_rand(0, $options['height']), $image_noise_color);
+          imageline($image, wp_rand(0, $options['width']), wp_rand(0, $options['height']), wp_rand(0, $options['width']), wp_rand(0, $options['height']), $image_noise_color);
     
         $textbox = imagettfbbox($options['font_size'], 0, $options['font'], $_SESSION['captcha_code']);
         $x = ($options['width'] - $textbox[4]) / 2;

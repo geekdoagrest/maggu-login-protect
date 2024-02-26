@@ -38,8 +38,8 @@ class WORAISLoginProtect{
 
     public static function menu(){
 		add_options_page(
-			__( 'Login Protect', 'worais-login-protect' ),
-			__( 'Login Protect', 'worais-login-protect' ),
+			esc_html__( 'Login Protect', 'worais-login-protect' ),
+			esc_html__( 'Login Protect', 'worais-login-protect' ),
 			'manage_options',
 			'worais-login-protect',
 			['WoraisLoginProtect', 'page']
@@ -97,8 +97,8 @@ class WORAISLoginProtect{
     public static function form(){
         $ip = apply_filters( 'worais_get_ip', $_SERVER);
 
-        echo __( 'Your IP:', 'worais-login-protect' );
-        echo " <i>$ip</i><br /><br />";
+        esc_html_e( 'Your IP:', 'worais-login-protect' );
+        echo " <i>".esc_attr($ip)."</i><br /><br />";
     }
 
     public static function get_ip(){

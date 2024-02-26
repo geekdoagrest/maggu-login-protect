@@ -7,10 +7,10 @@ $config = apply_filters('worais-login-protect-config', $config);
 <div id="worais-login-protect">
     <div id="header" style="background: #fff;padding: 20px;margin-left: -20px;border-bottom: 1px solid #e1e1e1;">
         <img src="<?php echo WORAIS_LOGIN_PROTECT_URL; ?>assets/logo.png" style="width: 32px;float: right;background: #fff;margin-top: -5px;"/>
-        <h1 style="margin: 0;color: #333;"><?php echo __('Login Protect', 'worais-login-protect' ); ?></h1>    
+        <h1 style="margin: 0;color: #333;"><?php esc_html_e('Login Protect', 'worais-login-protect' ); ?></h1>    
     </div>
     <div class="container logs">
-        <h2><?php echo __('Logs:', 'worais-login-protect' ); ?></h2>
+        <h2><?php esc_html_e('Logs:', 'worais-login-protect' ); ?></h2>
         <ul>
             <?php    
             $logs = $wpdb->get_results("SELECT * FROM `worais_login_protect` ORDER BY `datetime` DESC LIMIT 100");
@@ -68,53 +68,53 @@ $config = apply_filters('worais-login-protect-config', $config);
         </div>
         <?php } ?>
         <div class="container configs">
-            <h2><?php echo __('Settings:', 'worais-login-protect' ); ?></h2>
+            <h2><?php esc_html_e('Settings:', 'worais-login-protect' ); ?></h2>
             <section>
-                <h3><?php echo __('Logging:', 'worais-login-protect' ); ?></h3>
+                <h3><?php esc_html_e('Logging:', 'worais-login-protect' ); ?></h3>
                 <div>
-                    <label><?php echo __('Retention time:', 'worais-login-protect' ); ?></label>
-                    <i><?php echo __('days', 'worais-login-protect' ); ?></i>
+                    <label><?php esc_html_e('Retention time:', 'worais-login-protect' ); ?></label>
+                    <i><?php esc_html_e('days', 'worais-login-protect' ); ?></i>
                     <input name="retention_time" type="number" step="1" min="0" value="<?php echo $config['retention_time']; ?>">
-                    <span><?php echo __('Time in days that we must save the data.', 'worais-login-protect' ); ?></span>
+                    <span><?php esc_html_e('Time in days that we must save the data.', 'worais-login-protect' ); ?></span>
                 </div>
             </section>
             <section>
-                <h3><?php echo __('Lockouts:', 'worais-login-protect' ); ?></h3>
+                <h3><?php esc_html_e('Lockouts:', 'worais-login-protect' ); ?></h3>
                 <div>
-                    <label><?php echo __('Ban Threshold:', 'worais-login-protect' ); ?></label>
-                    <i><?php echo __('attempts', 'worais-login-protect' ); ?></i>
+                    <label><?php esc_html_e('Ban Threshold:', 'worais-login-protect' ); ?></label>
+                    <i><?php esc_html_e('attempts', 'worais-login-protect' ); ?></i>
                     <input name="ban_threshold" type="number" step="1" min="0" value="<?php echo $config['ban_threshold']; ?>">
-                    <span><?php echo __('Number of attempts to block the attacker.', 'worais-login-protect' ); ?></span>
+                    <span><?php esc_html_e('Number of attempts to block the attacker.', 'worais-login-protect' ); ?></span>
                     <br /><br />
                     
-                    <label><?php echo __('Ban Time:', 'worais-login-protect' ); ?></label>
-                    <i><?php echo __('minutes', 'worais-login-protect' ); ?></i>
+                    <label><?php esc_html_e('Ban Time:', 'worais-login-protect' ); ?></label>
+                    <i><?php esc_html_e('minutes', 'worais-login-protect' ); ?></i>
                     <input name="ban_time" type="number" step="1" min="0" value="<?php echo $config['ban_time']; ?>">
-                    <span><?php echo __('Login attempts blocking time', 'worais-login-protect' ); ?></span>                    
+                    <span><?php esc_html_e('Login attempts blocking time', 'worais-login-protect' ); ?></span>                    
                 </div>               
             </section>  
             <section>
-                <h3><?php echo __('Captcha:', 'worais-login-protect' ); ?></h3>
+                <h3><?php esc_html_e('Captcha:', 'worais-login-protect' ); ?></h3>
                 <div>
                     <input type="checkbox" name="captcha_show" <?php echo ($config['captcha_show']) ? 'checked' : ''; ?>>
-                    <label><?php echo __('Enable:', 'worais-login-protect' ); ?></label>
+                    <label><?php esc_html_e('Enable:', 'worais-login-protect' ); ?></label>
                     <br /><br />
 
-                    <label><?php echo __('Show after:', 'worais-login-protect' ); ?></label>
-                    <i><?php echo __('attempts', 'worais-login-protect' ); ?></i>
+                    <label><?php esc_html_e('Show after:', 'worais-login-protect' ); ?></label>
+                    <i><?php esc_html_e('attempts', 'worais-login-protect' ); ?></i>
                     <input name="captcha_threshold" type="number" step="1" min="0" value="<?php echo $config['captcha_threshold']; ?>">
-                    <span><?php echo __('Number of failed attempts before showing the captcha', 'worais-login-protect' ); ?></span>
+                    <span><?php esc_html_e('Number of failed attempts before showing the captcha', 'worais-login-protect' ); ?></span>
                 </div>
             </section>            
 
 
-            <button class="btn-lg btn-primary" id="btn-configs-save"><span class="spinner is-active"></span><?php echo __('Save', 'worais-login-protect' ); ?></button>
+            <button class="btn-lg btn-primary" id="btn-configs-save"><span class="spinner is-active"></span><?php esc_html_e('Save', 'worais-login-protect' ); ?></button>
         </div>
     <div>
     <div id="result"></div>
     <div id="footer" class="worais-footer">
         <p id="footer-left" class="alignleft">        
-		    <a href="https://github.com/worais/worais-login-protect" target="_blank">Login Protect</a> <?php echo __('is developed and maintained by', 'worais-login-protect' ); ?> <a href="https://worais.com" target="_blank">Worais</a>
+		    <a href="https://github.com/worais/worais-login-protect" target="_blank">Login Protect</a> <?php esc_html_e('is developed and maintained by', 'worais-login-protect' ); ?> <a href="https://worais.com" target="_blank">Worais</a>
         </p>
     </div>
 <div>

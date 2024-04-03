@@ -10,10 +10,10 @@
  * Tested up to: 6.4
  * Text Domain: worais-login-protect
  * Domain Path: /languages/
+ * License: GPLv3 or later
  */
 
-defined( 'ABSPATH' ) || exit;
-
+if ( ! defined( 'ABSPATH' ) ) exit;
 define('WORAIS_LOGIN_PROTECT_URL', plugin_dir_url( __FILE__ ));
 define('WORAIS_LOGIN_PROTECT_DIR', dirname( __FILE__ ));
 
@@ -58,7 +58,8 @@ class WORAISLoginProtect{
         if(empty($username )){ return false; }
 
         $status = (int)('wp_login' == current_filter());
-        $ip = apply_filters( 'worais_get_ip', $_SERVER);
+        $ip = esc_html(sanitize_text_field($_SERVER['REMOTE_ADDR']));      
+        $ip = apply_filters('worais_get_ip', $ip);
 
         $wpdb->insert('worais_login_protect', [
             'user_login' => $username,
@@ -68,8 +69,11 @@ class WORAISLoginProtect{
     }
 
     public static function waf(){
-        global $wpdb;
-        $ip = apply_filters( 'worais_get_ip', $_SERVER);
+        global $wpdb;        
+        $ip = esc_html(sanitize_text_field($_SERVER['REMOTE_ADDR']));      
+        $ip = apply_filters( 'worais_get_ip', $ip);
+
+
         $config = get_option('worais-login-protect');
         $config = apply_filters( 'worais-login-protect-config', $config);
 
@@ -95,45 +99,37 @@ class WORAISLoginProtect{
     }
 
     public static function form(){
-        $ip = apply_filters( 'worais_get_ip', $_SERVER);
+        $ip = esc_html(sanitize_text_field($_SERVER['REMOTE_ADDR']));      
+        $ip = apply_filters('worais_get_ip', $ip);
 
         esc_html_e( 'Your IP:', 'worais-login-protect' );
-        echo " <i>".esc_attr($ip)."</i><br /><br />";
+        echo " <i>".esc_html(sanitize_text_field($ip))."</i><br /><br />";
     }
 
-    public static function get_ip(){
-        $headers = [
-            'HTTP_CF_CONNECTING_IP', // CloudFlare
-            'HTTP_X_FORWARDED_FOR',  // AWS LB and other reverse-proxies
-            'HTTP_X_REAL_IP',
-            'HTTP_X_CLIENT_IP',
-            'HTTP_CLIENT_IP',
-            'HTTP_X_CLUSTER_CLIENT_IP',
-        ];
-        
-        foreach ($headers as $header) {
+    public static function get_ip($ip){
+        foreach (WORAIS_LOGIN_PROTECT_IP_HEADERS as $header) {
             if (array_key_exists($header, $_SERVER)) {
-                $ip = $_SERVER[$header];
-                
-                // This line might or might not be used.
+                $ip = esc_html(sanitize_text_field($_SERVER[$header]));
                 $ip = trim(explode(',', $ip)[0]);
-                
-                return $ip;
             }
-        }
+        }  
         
-        return $_SERVER['REMOTE_ADDR'];
+        return $ip;
     }
 
     public static function config_save(){
-        $data = get_option('worais-login-protect');
-        foreach( WORAIS_LOGIN_PROTECT_CONFIGS as $key => $value ){
-            $data[$key] = $_POST[$key];
+        if(!check_admin_referer('worais-login-protect-config')){
+            die();
         }
 
-        delete_option( 'worais-login-protect' );
+        $data = get_option('worais-login-protect');
+        foreach( WORAIS_LOGIN_PROTECT_CONFIGS as $key => $value ){
+            $data[$key] = esc_html(sanitize_text_field($_POST[$key]));
+        }
 
-        $action = add_option( 'worais-login-protect' , $data );
+        delete_option('worais-login-protect');
+
+        $action = add_option('worais-login-protect' , $data);
         if( $action ){
             echo "<div class='updated'>".__('Saved!', 'worais-login-protect' )."</div>";
         } else {

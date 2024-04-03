@@ -5,8 +5,8 @@
 **Requires at least:** 5.5 \
 **Tested up to:** 6.4 \
 **Requires PHP:** 7.2 \
-**Stable tag:** 3.2.6 \
-**License:** GPLv3
+**Stable tag:** 1.0.0 \
+**License:** GPLv3 or later
 
 Worais Login Protect plugin is an effective tool to enhance the security of your WordPress site, safeguarding it against brute force attacks and ensuring the integrity of user accounts. This plugin monitors and controls failed login attempts, implementing proactive measures to mitigate potential threats.
 

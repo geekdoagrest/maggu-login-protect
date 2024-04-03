@@ -1,9 +1,10 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+session_start();
 /*
     Extracted and adapted from: https://wordpress.org/plugins/worais-login-protect/
     thanks WebFactory Ltd ;)
 */
-session_start();
 class WoraisLoginCaptcha{
     public static function captcha_for_login(){
         self::captcha_image_generate();
@@ -13,7 +14,7 @@ class WoraisLoginCaptcha{
                 </p>';
 
         if (isset($_GET['captcha']) && $_GET['captcha'] == 'confirm_error') {
-            echo '<label style="color:#FF0000;" id="capt_err">' . esc_html($_SESSION['captcha_error']) . '</label><div style="clear:both;"></div>';;
+            echo '<label style="color:#FF0000;" id="capt_err">' . esc_html(sanitize_text_field($_SESSION['captcha_error'])) . '</label><div style="clear:both;"></div>';;
             $_SESSION['captcha_error'] = '';
         }
 
@@ -57,10 +58,10 @@ class WoraisLoginCaptcha{
         for ($i = 0; $i < $options['random_lines']; $i++)
           imageline($image, wp_rand(0, $options['width']), wp_rand(0, $options['height']), wp_rand(0, $options['width']), wp_rand(0, $options['height']), $image_noise_color);
     
-        $textbox = imagettfbbox($options['font_size'], 0, $options['font'], $_SESSION['captcha_code']);
+        $textbox = imagettfbbox($options['font_size'], 0, $options['font'], esc_html(sanitize_text_field($_SESSION['captcha_code'])));
         $x = ($options['width'] - $textbox[4]) / 2;
         $y = ($options['height'] - $textbox[5]) / 2;
-        imagettftext($image, $options['font_size'], 0, (int)$x, (int)$y, $text_color, $options['font'], $_SESSION['captcha_code']);
+        imagettftext($image, $options['font_size'], 0, (int)$x, (int)$y, $text_color, $options['font'], esc_html(sanitize_text_field($_SESSION['captcha_code'])));
     
         ob_start();
         imagejpeg($image);

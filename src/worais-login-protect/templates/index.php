@@ -1,4 +1,5 @@
-<link rel='stylesheet' href='<?php echo WORAIS_LOGIN_PROTECT_URL; ?>assets/style.css' media='all' />
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+<link rel='stylesheet' href='<?php echo sanitize_url(WORAIS_LOGIN_PROTECT_URL); ?>assets/style.css' media='all' />
 
 <?php
 $config = get_option('worais-login-protect');
@@ -6,7 +7,7 @@ $config = apply_filters('worais-login-protect-config', $config);
 ?>
 <div id="worais-login-protect">
     <div id="header" style="background: #fff;padding: 20px;margin-left: -20px;border-bottom: 1px solid #e1e1e1;">
-        <img src="<?php echo WORAIS_LOGIN_PROTECT_URL; ?>assets/logo.png" style="width: 32px;float: right;background: #fff;margin-top: -5px;"/>
+        <img src="<?php echo sanitize_url(WORAIS_LOGIN_PROTECT_URL); ?>assets/logo.png" style="width: 32px;float: right;background: #fff;margin-top: -5px;"/>
         <h1 style="margin: 0;color: #333;"><?php esc_html_e('Login Protect', 'worais-login-protect' ); ?></h1>    
     </div>
     <div class="container logs">
@@ -39,7 +40,7 @@ $config = apply_filters('worais-login-protect-config', $config);
         ?>          
         <div class="container summary">
             <canvas id="summaryChart" style="max-height: 300px;"></canvas>
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>          
+            <script src="<?php echo sanitize_url(WORAIS_LOGIN_PROTECT_URL); ?>assets/chart.js"></script>          
             <script>
             const ctx = document.getElementById('summaryChart');
 
@@ -68,13 +69,14 @@ $config = apply_filters('worais-login-protect-config', $config);
         </div>
         <?php } ?>
         <div class="container configs">
+            <?php wp_nonce_field('worais-login-protect-config'); ?>
             <h2><?php esc_html_e('Settings:', 'worais-login-protect' ); ?></h2>
             <section>
                 <h3><?php esc_html_e('Logging:', 'worais-login-protect' ); ?></h3>
                 <div>
                     <label><?php esc_html_e('Retention time:', 'worais-login-protect' ); ?></label>
                     <i><?php esc_html_e('days', 'worais-login-protect' ); ?></i>
-                    <input name="retention_time" type="number" step="1" min="0" value="<?php echo $config['retention_time']; ?>">
+                    <input name="retention_time" type="number" step="1" min="0" value="<?php echo esc_html(sanitize_text_field($config['retention_time'])); ?>">
                     <span><?php esc_html_e('Time in days that we must save the data.', 'worais-login-protect' ); ?></span>
                 </div>
             </section>
@@ -83,26 +85,26 @@ $config = apply_filters('worais-login-protect-config', $config);
                 <div>
                     <label><?php esc_html_e('Ban Threshold:', 'worais-login-protect' ); ?></label>
                     <i><?php esc_html_e('attempts', 'worais-login-protect' ); ?></i>
-                    <input name="ban_threshold" type="number" step="1" min="0" value="<?php echo $config['ban_threshold']; ?>">
+                    <input name="ban_threshold" type="number" step="1" min="0" value="<?php echo esc_html(sanitize_text_field($config['ban_threshold'])); ?>">
                     <span><?php esc_html_e('Number of attempts to block the attacker.', 'worais-login-protect' ); ?></span>
                     <br /><br />
                     
                     <label><?php esc_html_e('Ban Time:', 'worais-login-protect' ); ?></label>
                     <i><?php esc_html_e('minutes', 'worais-login-protect' ); ?></i>
-                    <input name="ban_time" type="number" step="1" min="0" value="<?php echo $config['ban_time']; ?>">
+                    <input name="ban_time" type="number" step="1" min="0" value="<?php echo esc_html(sanitize_text_field($config['ban_time'])); ?>">
                     <span><?php esc_html_e('Login attempts blocking time', 'worais-login-protect' ); ?></span>                    
                 </div>               
             </section>  
             <section>
                 <h3><?php esc_html_e('Captcha:', 'worais-login-protect' ); ?></h3>
                 <div>
-                    <input type="checkbox" name="captcha_show" <?php echo ($config['captcha_show']) ? 'checked' : ''; ?>>
+                    <input type="checkbox" name="captcha_show" <?php echo (esc_html(sanitize_text_field($config['captcha_show']))) ? 'checked' : ''; ?>>
                     <label><?php esc_html_e('Enable:', 'worais-login-protect' ); ?></label>
                     <br /><br />
 
                     <label><?php esc_html_e('Show after:', 'worais-login-protect' ); ?></label>
                     <i><?php esc_html_e('attempts', 'worais-login-protect' ); ?></i>
-                    <input name="captcha_threshold" type="number" step="1" min="0" value="<?php echo $config['captcha_threshold']; ?>">
+                    <input name="captcha_threshold" type="number" step="1" min="0" value="<?php echo esc_html(sanitize_text_field($config['captcha_threshold'])); ?>">
                     <span><?php esc_html_e('Number of failed attempts before showing the captcha', 'worais-login-protect' ); ?></span>
                 </div>
             </section>            

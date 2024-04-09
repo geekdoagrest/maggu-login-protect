@@ -78,7 +78,7 @@ class WoraisLoginCaptcha{
         return '<label>' . esc_html__('Validation is mandatory!', 'worais-login-protect') . '</label>';
       }
   
-      if (isset($_SESSION['captcha_code']) && esc_html($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code'])) {
+      if (isset($_SESSION['captcha_code']) && sanitize_text_field($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code'])) {
         return '<label>' . esc_html__('Captcha confirmation error!', 'worais-login-protect') . '</label>';
       }
 
@@ -88,13 +88,13 @@ class WoraisLoginCaptcha{
     public static function captcha_login_redirect($url){
       if(!isset($_REQUEST['log'])){ return false; }
 
-      if (empty($_REQUEST['captcha_code']) || (isset($_SESSION['captcha_code']) && esc_html($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code']))) {
+      if (empty($_REQUEST['captcha_code']) || (isset($_SESSION['captcha_code']) && sanitize_text_field($_SESSION['captcha_code']) != sanitize_text_field($_REQUEST['captcha_code']))) {
         $_SESSION['captcha_error'] = esc_html__('Incorrect captcha confirmation!', 'worais-login-protect');
         wp_clear_auth_cookie();
 
         WoraisLoginProtect::log( $_REQUEST['log'] );
 
-        return $_SERVER["REQUEST_URI"] . "/?captcha='confirm_error'";
+        return esc_html(sanitize_text_field($_SERVER["REQUEST_URI"])) . "/?captcha='confirm_error'";
       }
       
       return get_admin_url();

@@ -5,9 +5,9 @@
  * Description: Protect WordPress from unwanted login attempts
  * Author: Morais Junior
  * Author URI: https://worais.com
- * Version: 1.0.0
+ * Version: 1.1.0
  * Requires at least: 5.6
- * Tested up to: 6.4
+ * Tested up to: 6.5
  * Text Domain: worais-login-protect
  * Domain Path: /languages/
  * License: GPLv3 or later
@@ -131,9 +131,9 @@ class WORAISLoginProtect{
 
         $action = add_option('worais-login-protect' , $data);
         if( $action ){
-            echo "<div class='updated'>".__('Saved!', 'worais-login-protect' )."</div>";
+            echo "<div class='updated'>".esc_html__('Saved!', 'worais-login-protect' )."</div>";
         } else {
-            echo "<div class='error'>".__('Error!', 'worais-login-protect' )."</div>";
+            echo "<div class='error'>".esc_html__('Error!', 'worais-login-protect' )."</div>";
         }        
         exit;
     }

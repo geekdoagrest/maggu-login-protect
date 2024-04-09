@@ -1,5 +1,5 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
-<link rel='stylesheet' href='<?php echo sanitize_url(WORAIS_LOGIN_PROTECT_URL); ?>assets/style.css' media='all' />
+<link rel='stylesheet' href='<?php echo esc_html(sanitize_url(WORAIS_LOGIN_PROTECT_URL)); ?>assets/style.css' media='all' />
 
 <?php
 $config = get_option('worais-login-protect');
@@ -7,7 +7,7 @@ $config = apply_filters('worais-login-protect-config', $config);
 ?>
 <div id="worais-login-protect">
     <div id="header" style="background: #fff;padding: 20px;margin-left: -20px;border-bottom: 1px solid #e1e1e1;">
-        <img src="<?php echo sanitize_url(WORAIS_LOGIN_PROTECT_URL); ?>assets/logo.png" style="width: 32px;float: right;background: #fff;margin-top: -5px;"/>
+        <img src="<?php echo esc_html(sanitize_url(WORAIS_LOGIN_PROTECT_URL)); ?>assets/logo.png" style="width: 32px;float: right;background: #fff;margin-top: -5px;"/>
         <h1 style="margin: 0;color: #333;"><?php esc_html_e('Login Protect', 'worais-login-protect' ); ?></h1>    
     </div>
     <div class="container logs">
@@ -22,7 +22,7 @@ $config = apply_filters('worais-login-protect-config', $config);
                 foreach ($logs as $log) {
                     $color = ($log->status == 0)? '#900' : '#090';
 
-                    echo "<li style='color: $color;'>[$log->ip -> $log->datetime]: $log->user_login</li>";
+                    echo "<li style='color: ".esc_html($color).";'>[".esc_html($log->ip)." -> ".esc_html($log->datetime)."]: ".esc_html($log->user_login)."</li>";
                 }
             }            
             ?>
@@ -40,7 +40,7 @@ $config = apply_filters('worais-login-protect-config', $config);
         ?>          
         <div class="container summary">
             <canvas id="summaryChart" style="max-height: 300px;"></canvas>
-            <script src="<?php echo sanitize_url(WORAIS_LOGIN_PROTECT_URL); ?>assets/chart.js"></script>          
+            <script src="<?php echo esc_html(sanitize_url(WORAIS_LOGIN_PROTECT_URL)); ?>assets/chart.js"></script>          
             <script>
             const ctx = document.getElementById('summaryChart');
 
@@ -51,14 +51,14 @@ $config = apply_filters('worais-login-protect-config', $config);
                         {label: 'Logins', data: [
                             <?php
                                 foreach ($logins as $log) {
-                                    if($log->status == 1) { echo "{x: '$log->day', y: $log->sum},"; }
+                                    if($log->status == 1) { echo "{x: '".esc_html($log->day)."', y: ".esc_html($log->sum)."},"; }
                                 }
                             ?>]
                         },
                         {label: 'Lockouts', data: [
                             <?php
                                 foreach ($logins as $log) {
-                                    if($log->status == 0) { echo "{x: '$log->day', y: $log->sum},"; }
+                                    if($log->status == 0) { echo "{x: '".esc_html($log->day)."', y: ".esc_html($log->sum)."},"; }
                                 }
                             ?>]
                         }

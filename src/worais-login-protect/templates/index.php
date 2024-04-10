@@ -1,5 +1,4 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
-<link rel='stylesheet' href='<?php echo esc_html(sanitize_url(WORAIS_LOGIN_PROTECT_URL)); ?>assets/style.css' media='all' />
 
 <?php
 $config = get_option('worais-login-protect');
@@ -39,8 +38,7 @@ $config = apply_filters('worais-login-protect-config', $config);
             if(is_array($logins) && !empty($logins)){
         ?>          
         <div class="container summary">
-            <canvas id="summaryChart" style="max-height: 300px;"></canvas>
-            <script src="<?php echo esc_html(sanitize_url(WORAIS_LOGIN_PROTECT_URL)); ?>assets/chart.js"></script>          
+            <canvas id="summaryChart" style="max-height: 300px;"></canvas>        
             <script>
             const ctx = document.getElementById('summaryChart');
 

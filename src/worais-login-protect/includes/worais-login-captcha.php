@@ -92,7 +92,7 @@ class WoraisLoginCaptcha{
         $_SESSION['captcha_error'] = esc_html__('Incorrect captcha confirmation!', 'worais-login-protect');
         wp_clear_auth_cookie();
 
-        WoraisLoginProtect::log( $_REQUEST['log'] );
+        WoraisLoginProtect::log( sanitize_text_field($_REQUEST['log']) );
 
         return esc_html(sanitize_text_field($_SERVER["REQUEST_URI"])) . "/?captcha='confirm_error'";
       }

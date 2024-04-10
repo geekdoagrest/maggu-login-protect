@@ -19,7 +19,6 @@ jobs:
            node-version: 8
        - run: npm install
        - run: npm run build 
-       - run: cp README.md src/worais-login-protect/README.md
        - run: cp CHANGELOG.md src/worais-login-protect/CHANGELOG.md       
        - run: cd src/ && zip -r ../../worais-login-protect.zip worais-login-protect
        - uses: actions/upload-artifact@v1

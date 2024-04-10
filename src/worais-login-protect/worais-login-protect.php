@@ -106,6 +106,11 @@ class WORAISLoginProtect{
         echo " <i>".esc_html(sanitize_text_field($ip))."</i><br /><br />";
     }
 
+    public static function scripts(){
+        wp_enqueue_style('worais-login-protect-style', plugin_dir_url( __FILE__ ).'/assets/style.css');
+        wp_enqueue_script('worais-login-protect-chart', plugin_dir_url( __FILE__ ).'/assets/chart.js');
+    }
+
     public static function get_ip($ip){
         foreach (WORAIS_LOGIN_PROTECT_IP_HEADERS as $header) {
             if (array_key_exists($header, $_SERVER)) {
@@ -153,12 +158,13 @@ class WORAISLoginProtect{
 
 register_activation_hook( __FILE__, ['WoraisLoginProtect','install']);
 
-add_action('admin_menu',      ['WoraisLoginProtect', 'menu']);
-add_action('wp_login',        ['WoraisLoginProtect', 'log']);
-add_action('wp_login_failed', ['WoraisLoginProtect', 'log']);
-add_action('login_form_login',['WoraisLoginProtect', 'waf']);
-add_action('login_form',      ['WoraisLoginProtect', 'form']);
-add_action('plugins_loaded',  ['WoraisLoginProtect', 'load_plugin_textdomain'] );
+add_action('init',               ['WoraisLoginProtect', 'scripts']);
+add_action('admin_menu',         ['WoraisLoginProtect', 'menu']);
+add_action('wp_login',           ['WoraisLoginProtect', 'log']);
+add_action('wp_login_failed',    ['WoraisLoginProtect', 'log']);
+add_action('login_form_login',   ['WoraisLoginProtect', 'waf']);
+add_action('login_form',         ['WoraisLoginProtect', 'form']);
+add_action('plugins_loaded',     ['WoraisLoginProtect', 'load_plugin_textdomain'] );
 
 add_action('wp_ajax_worais-login-protect-config_save', ['WoraisLoginProtect', 'config_save']);
 

@@ -107,14 +107,13 @@ $config = apply_filters('worais-login-protect-config', $config);
                 </div>
             </section>            
 
-
             <button class="btn-lg btn-primary" id="btn-configs-save"><span class="spinner is-active"></span><?php esc_html_e('Save', 'worais-login-protect' ); ?></button>
         </div>
     <div>
     <div id="result"></div>
     <div id="footer" class="worais-footer">
         <p id="footer-left" class="alignleft">        
-		    <a href="https://github.com/worais/worais-login-protect" target="_blank">Login Protect</a> <?php esc_html_e('is developed and maintained by', 'worais-login-protect' ); ?> <a href="https://worais.com" target="_blank">Worais</a>
+		    <a href="https://github.com/worais/worais-login-protect" target="_blank">Login Protect</a> <?php esc_html_e('is developed and maintained by', 'worais-login-protect' ); ?> <a href="https://github.com/worais/" target="_blank">Worais</a>
         </p>
     </div>
 <div>

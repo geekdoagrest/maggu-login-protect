@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Worais Login Protect
- * Plugin URI: https://worais.com/login-protect
+ * Plugin URI: https://github.com/worais/login-protect
  * Description: Protect WordPress from unwanted login attempts
  * Author: Morais Junior
- * Author URI: https://worais.com
+ * Author URI: https://github.com/worais/
  * Version: 1.1.0
  * Requires at least: 5.6
  * Tested up to: 6.5
@@ -74,8 +74,8 @@ class WORAISLoginProtect{
         $ip = apply_filters( 'worais_get_ip', $ip);
 
 
-        $config = get_option('worais-login-protect');
-        $config = apply_filters( 'worais-login-protect-config', $config);
+        $config = get_option('worais-login-protect', WORAIS_LOGIN_PROTECT_CONFIGS);
+        $config = apply_filters('worais-login-protect-config', $config);
 
         //clear old data
         $wpdb->get_var( $wpdb->prepare(

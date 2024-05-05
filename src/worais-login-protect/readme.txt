@@ -5,7 +5,7 @@ Requires at least: 5.6
 Tested up to: 6.5
 Requires PHP: 7.2
 License: GPLv3 or later
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 
 == Description ==
 **Worais Login Protect** plugin is an effective tool to enhance the security of your WordPress site, safeguarding it against brute force attacks and ensuring the integrity of user accounts. This plugin monitors and controls failed login attempts, implementing proactive measures to mitigate potential threats :)
@@ -24,3 +24,15 @@ Stable tag: 1.1.0
 
 == Support ==
 If you encounter issues or have improvement suggestions, please open an [issue](https://github.com/worais/login-protect/issues)
+
+== Frequently Asked Questions ==
+= What gateways are supported in the plugin? =
+You can see the list of all supported gateways [through this link](https://wp-sms-pro.com/gateways).
+
+== Upgrade Notice ==
+= v1.1.1 =
+* Now only admin users can change settings
+
+== Changelog ==
+= v1.1.1 - 08.05.2024 =
+Fixes: Fixed default values for settings and permissions

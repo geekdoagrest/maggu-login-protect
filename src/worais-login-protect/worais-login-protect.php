@@ -5,7 +5,7 @@
  * Description: Protect WordPress from unwanted login attempts
  * Author: Morais Junior
  * Author URI: https://github.com/worais/
- * Version: 1.1.0
+ * Version: 1.1.1
  * Requires at least: 5.6
  * Tested up to: 6.5
  * Text Domain: worais-login-protect
